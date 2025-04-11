@@ -1,4 +1,9 @@
+import base64
 import requests
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import Config
 
 def get_weather_data(location):
@@ -18,6 +23,7 @@ def get_weather_data(location):
         raise Exception(f"Error fetching weather data: {e}")
     
     data = response.json()
+
     
     return {
         'temperature': data['main']['temp'],
@@ -27,3 +33,19 @@ def get_weather_data(location):
         'condition': data['weather'][0]['main'],
         'wind_speed': data['wind']['speed']
     } 
+    
+# Test the functions
+if __name__ == "__main__":
+    # Example Spotify track ID (you can replace this with any track ID)
+    test_location = {"latitude": 40.7128, "longitude": -74.0060}  # Example location
+    
+    print("Testing track details...")
+    try:
+        weather_info = get_weather_data(test_location)
+        print("\nWeather Details:")
+        print("-------------")
+        for key, value in weather_info.items():
+            print(f"{key}: {value}")
+        print("-------------")
+    except Exception as e:
+        print(f"Error: {str(e)}") 
