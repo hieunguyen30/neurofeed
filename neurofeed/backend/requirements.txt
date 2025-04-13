@@ -13,3 +13,8 @@ gunicorn==21.2.0
 python-dateutil==2.8.2
 SQLAlchemy==2.0.27
 alembic==1.13.1 
+google-auth==2.29.0
+google-auth-oauthlib==1.2.0
+google-auth-httplib2==0.2.0
+google-api-python-client==2.127.0
+spacy==3.7.4

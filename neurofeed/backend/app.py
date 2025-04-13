@@ -4,6 +4,10 @@ from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from config.settings import Config
+import os
+
+
+load_dotenv()
 
 # Initialize extensions
 db = SQLAlchemy()
@@ -12,7 +16,20 @@ jwt = JWTManager()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
-    app.config.from_object(config_class)
+
+    # --- Load Configuration from Environment Variables ---
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+    if not app.config['SECRET_KEY']:
+        raise ValueError("No SECRET_KEY set for Flask application")
+
+    app.config['GOOGLE_CLIENT_ID'] = os.environ.get('GOOGLE_CLIENT_ID')
+    app.config['GOOGLE_CLIENT_SECRET'] = os.environ.get('GOOGLE_CLIENT_SECRET')
+    app.config['GOOGLE_REDIRECT_URI'] = os.environ.get('GOOGLE_REDIRECT_URI')
+    app.config['SCOPES'] = ['https://www.googleapis.com/auth/calendar.readonly']
+    # Validate essential Google Config
+    if not app.config['GOOGLE_CLIENT_ID'] or not app.config['GOOGLE_CLIENT_SECRET'] or not app.config['GOOGLE_REDIRECT_URI']:
+         raise ValueError("Missing required Google OAuth configuration in environment variables.")
+
     
     # Initialize extensions with app
     db.init_app(app)
