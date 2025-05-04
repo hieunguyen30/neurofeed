@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.recommendation import Recommendation, RecommendationEngine
-from models.mood import MoodEntry
+from neurofeed.backend.models.moods import MoodEntry
 from models.music import Track
 from app import db
 import requests

@@ -34,6 +34,7 @@ def get_weather_data(location):
         'wind_speed': data['wind']['speed']
     } 
     
+'''
 # Test the functions
 if __name__ == "__main__":
     # Example Spotify track ID (you can replace this with any track ID)
@@ -49,3 +50,4 @@ if __name__ == "__main__":
         print("-------------")
     except Exception as e:
         print(f"Error: {str(e)}") 
+'''
