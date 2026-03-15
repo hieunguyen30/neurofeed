@@ -16,6 +16,13 @@ async def recommend(request: RecommendRequest):
         
         # Step 2: Fetch podcasts based on mood
         podcasts = await get_podcasts(mood_result["keywords"])
+
+        await save_mood_history(
+            user_input=request.user_input,
+            mood=mood_result["mood"],
+            keywords=mood_result["keywords"],
+            reason=mood_result["reason"]
+        )
         
         return {
             "mood": mood_result["mood"],
