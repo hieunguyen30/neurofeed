@@ -30,7 +30,7 @@ export default function Home() {
     setResult(null)
  
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/recommend', {
+      const res = await fetch('https://neurofeed-backend.onrender.com/api/recommend', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_input: userInput }),
