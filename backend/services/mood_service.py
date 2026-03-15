@@ -16,13 +16,13 @@ async def detect_mood(user_input: str) -> dict:
                 "role": "system",
                 "content": """You are a mood analyzer. Given a user's text, return ONLY a JSON object with:
                 - mood: one of (happy, sad, stressed, focused, energetic, tired, anxious)
-                - keywords: a list of 2-3 podcast search keywords matching their mood
+                - keywords: a list of 2-3 short podcast search terms (1-2 words max each, e.g. "meditation", "focus", "sleep", "stoicism", "anxiety" — NOT phrases like "stress management techniques")
                 - reason: one sentence explaining the mood detection
                 
                 Example response:
                 {
                     "mood": "stressed",
-                    "keywords": ["meditation", "calm", "stress relief"],
+                    "keywords": ["meditation", "calm", "anxiety"],
                     "reason": "User seems overwhelmed and needs calming content"
                 }
                 
@@ -36,6 +36,5 @@ async def detect_mood(user_input: str) -> dict:
     )
     
     response_text = message.choices[0].message.content
-    print("GROQ RESPONSE:", response_text)  # ADD THIS
     mood_data = json.loads(response_text)
     return mood_data

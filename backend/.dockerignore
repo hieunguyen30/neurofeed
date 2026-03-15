@@ -1,0 +1,9 @@
+ni .dockerignore
+```
+
+Paste this in:
+```
+venv/
+__pycache__/
+*.pyc
+.env
