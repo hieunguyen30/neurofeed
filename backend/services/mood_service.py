@@ -1,6 +1,9 @@
 import os
 import json
 from groq import Groq
+from dotenv import load_dotenv
+
+load_dotenv()
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
@@ -33,5 +36,6 @@ async def detect_mood(user_input: str) -> dict:
     )
     
     response_text = message.choices[0].message.content
+    print("GROQ RESPONSE:", response_text)  # ADD THIS
     mood_data = json.loads(response_text)
     return mood_data
