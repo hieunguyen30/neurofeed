@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\09041\\\\Documents\\\\PersonalProject\\\\neurofeed\" -Force)",
+      "Bash(Select-Object Name, FullName)",
+      "Bash(Format-Table -AutoSize)",
+      "PowerShell(ls -R \"c:\\\\Users\\\\09041\\\\Documents\\\\PersonalProject\\\\neurofeed\\\\frontend\" -Exclude \"node_modules\" | Where-Object {$_.Name -match \"\\\\.\\(tsx|ts|json\\)$\"} | Select-Object FullName)",
+      "Bash(pip install *)"
+    ]
+  }
+}

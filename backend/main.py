@@ -1,13 +1,21 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from routes.recommend import router as recommend_router
+from services.embeddings import load_model
 
 load_dotenv()
 
-app = FastAPI(title="Neurofeed API")
 
-# Allow frontend to talk to backend
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    load_model()
+    yield
+
+
+app = FastAPI(title="Neurofeed API", lifespan=lifespan)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
@@ -16,8 +24,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Routes
 app.include_router(recommend_router, prefix="/api")
+
 
 @app.get("/health")
 def health_check():
