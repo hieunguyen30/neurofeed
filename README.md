@@ -12,7 +12,7 @@ A mood-aware podcast recommendation app. Tell it how you're feeling — it detec
 - Dockerized + deployed on Render
 
 **AI**
-- Groq API (llama-3.3-70b) for mood detection
+- Anthropic Claude API (claude-opus-4-7) for mood detection
 - sentence-transformers (all-MiniLM-L6-v2) for mood embeddings
 
 **Database**
@@ -25,7 +25,7 @@ A mood-aware podcast recommendation app. Tell it how you're feeling — it detec
 ## How It Works
 
 1. User describes how they're feeling in natural language
-2. Groq LLM analyzes the text and returns a mood + search keywords
+2. Claude (claude-opus-4-7) analyzes the text and returns a mood + search keywords
 3. The mood description is embedded using all-MiniLM-L6-v2 (384-dim vector)
 4. pgvector searches past embeddings for semantically similar moods (cosine similarity ≥ 0.65)
 5. Keywords are used to query the Podcast Index API for fresh results
@@ -54,7 +54,7 @@ npm run dev
 
 Create a `.env` file in `/backend`:
 ```
-GROQ_API_KEY=
+ANTHROPIC_API_KEY=
 SUPABASE_URL=
 SUPABASE_KEY=        # must be the service_role key (not anon) — required for pgvector RLS
 PODCAST_INDEX_KEY=
